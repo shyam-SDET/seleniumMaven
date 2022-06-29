@@ -34,7 +34,7 @@ public class Test1 {
         JSONObject json = new JSONObject(str);
         Assert.assertEquals(json.get("name"),"shyam1");
         Assert.assertEquals(json.get("job"),"SDET1");
-        System.out.println("TEST RUN SUCCESSFULLY);
+        System.out.println("Test Run Successfully");
         //JSONObject jsonObject1=JSONObject.
     }
 }
