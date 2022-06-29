@@ -9,7 +9,7 @@ import org.json.JSONObject;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class Dunzo {
+public class WeatherApi {
 
     @Test
     public void testApi()
