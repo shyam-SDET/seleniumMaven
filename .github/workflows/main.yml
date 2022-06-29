@@ -1,42 +1,17 @@
-name: Selenium Test Workflow
-
-on: push
-
 jobs:
-  Selenium_Test_Job1:
-    name: Selenium Test Job
-    runs-on: windows-latest
-    env: 
-      SELENIUM_DRIVER: 'RemoteWebDrivers'
-    
-    steps:
-      - run: echo "This is running inside a ${{ runner.os }} server in GitHub"
-      - run: echo "The code is being trigger by ${{ github.repository_owner }}"
-      - name: Check out source code
-        uses: actions/checkout@v2.4.0
-      - run: echo "This repo is ${{ github.repository }} .."
-      - name: Run a inline script
-        run: |
-          mkdir newfolder
-          ls -l
-        shell: bash
-      - name: Run a script file from repo
-        if: ${{ always() }}
-        run: sh ./run.sh
-        shell: pwsh
-      - name: Execute during failure
-        if: ${{ failure() }}
-        run: echo "One of the step seems failed"
-      - name: Run Selenium Test
-        if: ${{ env.SELENIUM_DRIVER == 'RemoteWebDriver' }}
-        run: echo "Running test in Selenium grid setup"
-        
-        
-  Selenium_test_Job2:
-    name: Selenium Test Job 2
+  build:
     runs-on: ubuntu-latest
-    needs: Selenium_Test_Job1
-    if: ${{ always() }}
-    
     steps:
-      - run: echo "This is from second job"
+    - name: Checkout
+    uses: actions/checkout@v1
+    - name: Get XML
+      id: getxml
+      uses: mavrosxristoforos/get-xml-info@1.0
+      with:
+        xml-file: 'a-file-here.xml'
+        xpath: '//version'
+    - name: Create Release
+      uses: some-random/release-action@v1
+      with:
+        artifacts: 'another-file.zip'
+        tag: ${{ steps.getxml.outputs.info }}
