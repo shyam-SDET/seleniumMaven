@@ -35,9 +35,14 @@ jobs:
         uses: mavrosxristoforos/get-xml-info@1.0
         with:
             xml-file: 'testing.xml'
-            xpath: '//version'
+#             xpath: '//version'
 #         if: ${{ failure() }}
 #         run: echo "One of the step seems failed"
+      - name: Create Release
+        uses: some-random/release-action@v1
+        with:
+          artifacts: 'another-file.zip'
+          tag: ${{ steps.getxml.outputs.info }}
         
         
   Selenium_test_Job2:
