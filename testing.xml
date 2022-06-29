@@ -4,6 +4,7 @@
     <test name="Test">
         <classes>
             <class name="demo.Test1"/>
+            <class name="demo.WeatherApi"/>
         </classes>
     </test> <!-- Test -->
 </suite> <!-- Suite -->
